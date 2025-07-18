@@ -1,0 +1,27 @@
+{
+  "name": "migrilla",
+  "version": "1.0.2",
+  "description": "Simple PostgreSQL migration tool",
+  "main": "lib/index.js",
+  "bin": {
+    "migrilla": "./bin/migrilla.js"
+  },
+  "keywords": [
+    "postgresql",
+    "migration",
+    "database",
+    "pg",
+    "sql"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^8.12.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  }
+} 
