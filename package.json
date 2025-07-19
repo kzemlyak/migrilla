@@ -16,12 +16,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^17.2.0",
     "pg": "^8.12.0"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "test:docker": "./scripts/test-docker.sh",
+    "setup:env": "./scripts/setup-env.sh",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs postgres",
+    "migrate:up": "node bin/migrilla.js up",
+    "migrate:down": "node bin/migrilla.js down",
+    "migrate:status": "node bin/migrilla.js status"
   }
-} 
+}

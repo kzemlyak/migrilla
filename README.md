@@ -5,6 +5,8 @@ Simple PostgreSQL migration tool for Node.js applications.
 > 🇷🇺 **[Русская версия](README_RU.md)** | 🇺🇸 **English version**
 
 > 🚀 **[Quick Start Guide](QUICKSTART.md)** - Get started in under 5 minutes!
+> 🐳 **[Docker Setup](DOCKER_SETUP.md)** - Test with Docker!
+> 🐳 **[Docker Quick Start](QUICKSTART_DOCKER.md)** - Docker setup in 2 minutes!
 
 ## 🚀 Installation
 
