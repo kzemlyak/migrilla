@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createMigrilla = require('../lib/index');
 const fs = require('fs');
 
@@ -13,7 +15,7 @@ async function testMigrilla() {
     password: process.env.MIGRILLA_DB_PASSWORD || '',
     connectionString: process.env.MIGRILLA_DATABASE_URL
   };
-  
+
   const migrilla = createMigrilla(config);
   
   try {
