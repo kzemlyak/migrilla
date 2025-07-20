@@ -19,10 +19,10 @@ npm install migrilla
 ### Commands
 
 ```bash
-migrilla up      # Apply all pending migrations
-migrilla down    # Rollback the last applied migration
-migrilla status  # Show migration status
-migrilla help    # Show help message
+migrilla up              # Apply all pending migrations
+migrilla down [step]     # Rollback migrations (default: 1, max: all applied)
+migrilla status          # Show migration status
+migrilla help            # Show help message
 ```
 
 ### Environment Variables
@@ -112,8 +112,14 @@ migrilla up
 # Check migration status
 migrilla status
 
-# Rollback last migration
+# Rollback 1 migration (default)
 migrilla down
+
+# Rollback 3 migrations
+migrilla down 3
+
+# Rollback all applied migrations
+migrilla down 999
 ```
 
 ### Example Output
@@ -142,9 +148,21 @@ Pending: 1
 
 $ migrilla down
 ✅ Migrilla initialized successfully
+🔄 Rolling back 1 migration(s)...
 🔄 Rolling back migration: 002_add_orders_table
 ✅ Executed: 002_add_orders_table
 ✅ Migration rolled back successfully!
+
+$ migrilla down 3
+✅ Migrilla initialized successfully
+🔄 Rolling back 3 migration(s)...
+🔄 Rolling back migration: 003_add_indexes
+✅ Executed: 003_add_indexes
+🔄 Rolling back migration: 002_add_orders_table
+✅ Executed: 002_add_orders_table
+🔄 Rolling back migration: 001_add_users_table
+✅ Executed: 001_add_users_table
+✅ 3 migrations rolled back successfully!
 ```
 
 ## 🔧 Programmatic Usage
@@ -165,8 +183,14 @@ const migrilla = createMigrilla({
 // Apply migrations
 await migrilla.up();
 
-// Rollback last migration
+// Rollback 1 migration (default)
 await migrilla.down();
+
+// Rollback 3 migrations
+await migrilla.down(3);
+
+// Rollback all applied migrations
+await migrilla.down(999);
 
 // Get status
 await migrilla.status();
@@ -239,6 +263,9 @@ This means your database will always be in a consistent state, even if a migrati
 ```bash
 # Run basic tests
 npm test
+
+# Run detailed down step tests (requires applied migrations)
+npm run test:down-step
 ```
 
 ## 🎉 Key Benefits

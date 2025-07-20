@@ -1,6 +1,6 @@
 {
   "name": "migrilla",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple PostgreSQL migration tool",
   "main": "lib/index.js",
   "bin": {
@@ -24,6 +24,7 @@
   },
   "scripts": {
     "test": "node test/test.js",
+    "test:down-step": "node test/test-down-step.js",
     "test:docker": "./scripts/test-docker.sh",
     "setup:env": "./scripts/setup-env.sh",
     "docker:up": "docker-compose up -d",

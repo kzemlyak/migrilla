@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2024-01-01
+
+### ✨ Added
+- **Enhanced Down Command**: Added support for specifying number of migrations to rollback
+  - `migrilla down` - Rollback 1 migration (default behavior)
+  - `migrilla down 3` - Rollback 3 migrations
+  - `migrilla down 999` - Rollback all applied migrations
+- **Step Parameter Validation**: Automatic validation of step parameter
+  - Prevents negative or invalid step values
+  - Automatically adjusts step to available migrations count
+  - Clear error messages for invalid inputs
+
+### 🔧 Changed
+- **CLI Interface**: Updated help text to document new step parameter
+- **Programmatic API**: `down()` method now accepts optional step parameter
+- **Error Handling**: Enhanced error messages for invalid step values
+
+### 🧪 Testing
+- **New Test Suite**: Added comprehensive tests for step parameter functionality
+- **Edge Case Testing**: Tests for invalid inputs, large step values, and boundary conditions
+
 ## [1.0.2] - 2024-01-01
 
 ### 🔧 Changed

@@ -13,10 +13,10 @@ npm install migrilla
 ### Команды
 
 ```bash
-migrilla up      # Применить все ожидающие миграции
-migrilla down    # Откатить последнюю миграцию
-migrilla status  # Показать статус миграций
-migrilla help    # Показать справку
+migrilla up              # Применить все ожидающие миграции
+migrilla down [step]     # Откатить миграции (по умолчанию: 1, максимум: все применённые)
+migrilla status          # Показать статус миграций
+migrilla help            # Показать справку
 ```
 
 ### Переменные окружения
@@ -93,8 +93,14 @@ const migrilla = createMigrilla({
 // Применить миграции
 await migrilla.up();
 
-// Откатить последнюю миграцию
+// Откатить 1 миграцию (по умолчанию)
 await migrilla.down();
+
+// Откатить 3 миграции
+await migrilla.down(3);
+
+// Откатить все применённые миграции
+await migrilla.down(999);
 
 // Показать статус
 await migrilla.status();
