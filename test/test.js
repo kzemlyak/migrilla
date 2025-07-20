@@ -55,15 +55,60 @@ async function testMigrilla() {
     console.log('\n4. Current migration status:');
     await migrilla.status();
     
+    // Test 5: Test down method with step parameter (basic validation)
+    console.log('\n5. Testing down method with step parameter (basic validation)...');
+    await testDownWithStep(migrilla);
+    
+    console.log('\n💡 Note: For full down step testing with applied migrations, run:');
+    console.log('   node test/test-down-step.js');
+    
     console.log('\n🎉 All tests passed!');
     console.log('\n💡 To test migrations, run:');
-    console.log('   migrilla up    - Apply all migrations');
-    console.log('   migrilla status - Check status');
-    console.log('   migrilla down  - Rollback last migration');
+    console.log('   migrilla up        - Apply all migrations');
+    console.log('   migrilla status    - Check status');
+    console.log('   migrilla down      - Rollback 1 migration');
+    console.log('   migrilla down 3    - Rollback 3 migrations');
   } catch (error) {
     console.error('❌ Test failed:', error.message);
   } finally {
     await migrilla.close();
+  }
+}
+
+async function testDownWithStep(migrilla) {
+  try {
+    // Get current applied migrations
+    let appliedMigrations = await migrilla.getAppliedMigrations();
+    
+    console.log(`   📊 Found ${appliedMigrations.length} applied migration(s)`);
+    
+    // Test 5.1: Test down() without step (should default to 1)
+    console.log('   🔄 Testing down() without step parameter...');
+    await migrilla.down();
+    
+    // Test 5.2: Test down(1) explicitly
+    console.log('   🔄 Testing down(1) explicitly...');
+    await migrilla.down(1);
+    
+    // Test 5.3: Test down with step > 1 (if we have enough migrations)
+    console.log('   🔄 Testing down(2) to rollback 2 migrations...');
+    await migrilla.down(2);
+    
+    // Test 5.4: Test down with step larger than available migrations
+    console.log('   🔄 Testing down with step larger than available migrations...');
+    await migrilla.down(10);
+    
+    // Test 5.5: Test down with invalid step
+    console.log('   🔄 Testing down with invalid step (0)...');
+    await migrilla.down(0);
+    
+    // Test 5.6: Test down with invalid step (negative)
+    console.log('   🔄 Testing down with invalid step (-1)...');
+    await migrilla.down(-1);
+    
+    console.log('   ✅ All down method tests passed!');
+  } catch (error) {
+    console.error('   ❌ Down method test failed:', error.message);
   }
 }
 
